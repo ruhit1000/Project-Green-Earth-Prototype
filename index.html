@@ -12,7 +12,33 @@
 </head>
 
 <body>
+    <main class="container mx-auto text-center">
+        <h2 class="text-[#4ade80] font-bold text-4xl">Choose Your Trees</h2>
 
+        <section class="grid grid-cols-4 gap-8">
+            <!-- Categories -->
+            <div class="bg-white card card-body shadow-2xl col-span-1">
+                <h2 class="font-bold text-2xl">Categories</h2>
+                <div class="space-y-3 my-3"> 
+                    <button class="btn btn-success w-full" id="allTreesBtn">All Trees</button>
+                    <div class="space-y-3" id="categoriesContainer"></div>
+                </div>
+            </div>
+
+            <!-- Trees Section -->
+            <div class="bg-red-300 col-span-2">
+                Trees
+            </div>
+
+            <!-- Cart Section -->
+            <div class="bg-green-500 col-span-1">
+                Cart
+            </div>
+        </section>
+
+    </main>
+
+    <script src="./script.js"></script>
 </body>
 
 </html>
