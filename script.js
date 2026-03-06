@@ -2,6 +2,12 @@ const categoriesContainer = document.getElementById('categoriesContainer');
 const treesContainer = document.getElementById('treesContainer');
 const loadingSpinner = document.getElementById('loading-spinner');
 const allTreesbtn = document.getElementById('allTreesBtn');
+const treeDetailsModal = document.getElementById('tree-details-modal');
+const modalImage = document.getElementById('modalImage')
+const modalCategory = document.getElementById('modalCategory')
+const modalDescription = document.getElementById('modalDescription')
+const modalPrice = document.getElementById('modalPrice')
+const modalTitle = document.getElementById('modalTitle')
 
 const loadCategories = async () => {
     const res = await fetch('https://openapi.programming-hero.com/api/categories');
@@ -62,11 +68,11 @@ const displayTrees = (trees) => {
         treeCard.className = "card bg-base-100 shadow-sm"
         treeCard.innerHTML = `
         <figure>
-            <img class="h-48 w-full object-cover" src= ${tree.image}
+            <img class="h-48 w-full object-cover cursor-pointer" onclick="openTreeModal(${tree.id})" src= ${tree.image}
                 alt=${tree.name} />
         </figure>
         <div class="card-body">
-            <h2 class="card-title">${tree.name}</h2>
+            <h2 class="card-title cursor-pointer hover:text-[#4ade80]" onclick="openTreeModal(${tree.id})">${tree.name}</h2>
             <p class="line-clamp-2">${tree.description}</p>
             <div class="badge badge-outline badge-success">${tree.category}</div>
             <div class="card-actions justify-between items-center">
@@ -77,6 +83,18 @@ const displayTrees = (trees) => {
         `
         treesContainer.appendChild(treeCard)
     })
+}
+
+const openTreeModal = async(id) => {
+    const res = await fetch(`https://openapi.programming-hero.com/api/plant/${id}`);
+    const data = await res.json();
+    const plantDetails = data.plants;
+    modalTitle.textContent = plantDetails.name;
+    modalImage.src = plantDetails.image;
+    modalCategory.textContent = plantDetails.category;
+    modalPrice.textContent = plantDetails.price;
+    modalDescription.textContent = plantDetails.description
+    treeDetailsModal.showModal()
 }
 
 loadCategories()
