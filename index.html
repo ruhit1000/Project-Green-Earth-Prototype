@@ -9,25 +9,28 @@
     <!-- DaisyUI and Tailwind -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-    <main class="container mx-auto text-center">
-        <h2 class="text-[#4ade80] font-bold text-4xl">Choose Your Trees</h2>
+    <main class="container mx-auto">
+        <h2 class="text-[#4ade80] font-bold text-4xl text-center my-5">Choose Your Trees</h2>
 
         <section class="grid grid-cols-4 gap-8">
             <!-- Categories -->
             <div class="bg-white card card-body shadow-2xl col-span-1">
                 <h2 class="font-bold text-2xl">Categories</h2>
-                <div class="space-y-3 my-3"> 
+                <div class="space-y-3 my-3">
                     <button class="btn btn-success w-full" id="allTreesBtn">All Trees</button>
                     <div class="space-y-3" id="categoriesContainer"></div>
                 </div>
             </div>
 
             <!-- Trees Section -->
-            <div class="bg-red-300 col-span-2">
-                Trees
+            <div class="col-span-2">
+                <div id="treesContainer" class="grid grid-cols-1 sm:grid-cols-3 gap-6"></div>
             </div>
 
             <!-- Cart Section -->
