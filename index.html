@@ -38,13 +38,28 @@
 
             <!-- Cart Section -->
             <div class="bg-white card card-body shadow-2xl col-span-1">
-                Cart
+                <h2 class="font-bold text-3xl mb-2">Cart</h2>
+
+                <div class="space-y-4">
+                    <div id="cartContainer" class="space-y-4"></div>
+
+                    <div id="emptyCartMessage" class="text-center py-4">
+                        <p>Your cart is empty</p>
+                        <p>Add trees to get started</p>
+                    </div>
+
+                    <!-- Total Amount -->
+                    <div class="flex justify-between items-center bg-green-50 rounded-lg p-4 my-3 font-bold">
+                        <span>Total:</span>
+                        <span id="total-price">$0</span>
+                    </div>
+
+                </div>
+
             </div>
         </section>
 
         <!-- Product Details Modal -->
-        <!-- Open the modal using ID.showModal() method -->
-        <!-- <button class="btn" onclick="my_modal_1.showModal()">open modal</button> -->
         <dialog id="tree-details-modal" class="modal">
             <div class="modal-box">
 
