@@ -1,5 +1,7 @@
 const categoriesContainer = document.getElementById('categoriesContainer');
-const treesContainer = document.getElementById('treesContainer')
+const treesContainer = document.getElementById('treesContainer');
+const loadingSpinner = document.getElementById('loading-spinner');
+const allTreesbtn = document.getElementById('allTreesBtn');
 
 const loadCategories = async () => {
     const res = await fetch('https://openapi.programming-hero.com/api/categories');
@@ -8,17 +10,53 @@ const loadCategories = async () => {
         const btn = document.createElement('button')
         btn.className = "btn btn-outline w-full"
         btn.textContent = category.category_name
+        btn.onclick = () => selectCatagory(category.id, btn)
         categoriesContainer.appendChild(btn)
     });
 }
 
+const selectCatagory = async (id, btn) => {
+    showLoading()
+    const allCategoryBtns = document.querySelectorAll('#categoriesContainer button, #allTreesBtn')
+    allCategoryBtns.forEach((btn) => {
+        btn.classList.remove('btn-active', 'btn-success')
+    })
+    btn.classList.add('btn-active', 'btn-success')
+
+    const res = await fetch(`https://openapi.programming-hero.com/api/category/${id}`)
+    const data = await res.json()
+    removeLoading()
+    displayTrees(data.plants)
+}
+
+const showLoading = () => {
+    loadingSpinner.classList.remove('hidden');
+    treesContainer.innerHTML = ''
+}
+
+const removeLoading = () => {
+    loadingSpinner.classList.add('hidden');
+}
+
+allTreesbtn.addEventListener('click', () => {
+    const allCategoryBtns = document.querySelectorAll('#categoriesContainer button, #allTreesBtn')
+    allCategoryBtns.forEach((btn) => {
+        btn.classList.remove('btn-active', 'btn-success')
+    })
+    allTreesbtn.classList.add('btn-active', 'btn-success')
+    loadTrees()
+})
+
 const loadTrees = async () => {
+    showLoading()
     const res = await fetch('https://openapi.programming-hero.com/api/plants')
     const data = await res.json();
+    removeLoading()
     displayTrees(data.plants)
 }
 
 const displayTrees = (trees) => {
+    treesContainer.innerHTML = ''
     trees.forEach((tree) => {
         const treeCard = document.createElement('div');
         treeCard.className = "card bg-base-100 shadow-sm"
